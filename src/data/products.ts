@@ -1,9 +1,39 @@
+// ---------------------------------------------------------------------------
+// PLACEHOLDER PRICING
+// No real prices exist yet (the original site was inquiry-only). These are
+// flat per-category placeholders so the shop UI works end-to-end -- replace
+// with real prices before going live.
+// ---------------------------------------------------------------------------
+export const PRICING = {
+  microgreen: { price: 70, unit: "50g pack" },
+  sprout: { price: 50, unit: "100g pack" },
+  flower: { price: 120, unit: "20g pack" },
+};
+
 export interface ProductItem {
+  id: string;
   name: string;
   benefits: string;
+  price: number;
+  unit: string;
 }
 
-export const microgreens: ProductItem[] = [
+function slugify(name: string) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+function withPricing(
+  category: "microgreen" | "sprout" | "flower",
+  items: { name: string; benefits: string }[],
+): ProductItem[] {
+  return items.map((item) => ({
+    id: `${category}-${slugify(item.name)}`,
+    ...item,
+    ...PRICING[category],
+  }));
+}
+
+export const microgreens: ProductItem[] = withPricing("microgreen", [
   { name: "Wheatgrass", benefits: "Detox, Energy, Immunity" },
   { name: "Sunflower", benefits: "Protein, Minerals, Taste" },
   { name: "Pea Shoots", benefits: "Sweet, Tender, Nutritious" },
@@ -33,9 +63,9 @@ export const microgreens: ProductItem[] = [
   { name: "Celery", benefits: "Hydrating, Mineral Rich" },
   { name: "Lettuce", benefits: "Tender, Lutein Rich" },
   { name: "Chives", benefits: "Onion Flavor, Minerals" },
-];
+]);
 
-export const sprouts: ProductItem[] = [
+export const sprouts: ProductItem[] = withPricing("sprout", [
   { name: "Mung Bean", benefits: "Protein, Digestive Enzymes" },
   { name: "Alfalfa", benefits: "Complete Amino Acids" },
   { name: "Broccoli", benefits: "Sulforaphane, Detox" },
@@ -47,9 +77,9 @@ export const sprouts: ProductItem[] = [
   { name: "Lentil", benefits: "Protein, Iron" },
   { name: "Sunflower", benefits: "Vitamin E, Minerals" },
   { name: "Mustard", benefits: "Spicy, Metabolism" },
-];
+]);
 
-export const edibleFlowers: ProductItem[] = [
+export const edibleFlowers: ProductItem[] = withPricing("flower", [
   { name: "Nasturtium", benefits: "Peppery, Vitamin C" },
   { name: "Pansy", benefits: "Mild, Colorful" },
   { name: "Viola", benefits: "Sweet, Antioxidants" },
@@ -64,19 +94,25 @@ export const edibleFlowers: ProductItem[] = [
   { name: "Hollyhock", benefits: "Showy, Antioxidants" },
   { name: "Impatiens", benefits: "Colorful, Delicate" },
   { name: "Begonia", benefits: "Tangy, Vitamin C" },
-];
+]);
 
 export interface GrowKit {
+  id: string;
   name: string;
   tag: string;
+  price: number;
+  unit: string;
   featured?: boolean;
   items: string[];
 }
 
 export const growKits: GrowKit[] = [
   {
+    id: "kit-starter",
     name: "Starter Kit",
     tag: "Perfect for beginners",
+    price: 899,
+    unit: "1 kit",
     items: [
       "Grow tray with drainage",
       "Premium cocopeat substrate",
@@ -85,8 +121,11 @@ export const growKits: GrowKit[] = [
     ],
   },
   {
+    id: "kit-premium",
     name: "Premium Kit",
     tag: "For serious growers",
+    price: 1799,
+    unit: "1 kit",
     featured: true,
     items: [
       "Multiple grow trays",

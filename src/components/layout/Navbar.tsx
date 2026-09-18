@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Menu, X, Leaf } from "lucide-react";
+import { Menu, X, Leaf, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useCart } from "@/context/CartContext";
+import { CartDrawer } from "@/components/cart/CartDrawer";
 
 const links = [
   { href: "/about", label: "About" },
@@ -15,6 +17,8 @@ const links = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const { itemCount } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -57,23 +61,38 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setCartOpen(true)}
+            aria-label="Open cart"
+            className="relative flex h-10 w-10 items-center justify-center rounded-full text-forest-950 transition-colors hover:bg-forest-900/8"
+          >
+            <ShoppingBag className="h-5 w-5" />
+            {itemCount > 0 && (
+              <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-gold-500 px-1 text-[10px] font-semibold text-forest-950">
+                {itemCount}
+              </span>
+            )}
+          </button>
+
           <Link
             to="/contact"
-            className="inline-flex items-center rounded-full bg-forest-900 px-6 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-forest-800"
+            className="hidden items-center rounded-full bg-forest-900 px-6 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-forest-800 lg:inline-flex"
           >
             Get in Touch
           </Link>
-        </div>
 
-        <button
-          className="text-forest-950 lg:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+          <button
+            className="text-forest-950 lg:hidden"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
+
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
 
       {open && (
         <div className="border-t border-forest-900/10 bg-cream px-6 py-6 lg:hidden">

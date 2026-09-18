@@ -4,16 +4,28 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { PageHero } from "@/components/ui/PageHero";
 import { blogPosts } from "@/data/content";
+import { subscribeNewsletter } from "@/lib/api";
 
 export function Blog() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  function handleSubscribe(e: FormEvent) {
+  async function handleSubscribe(e: FormEvent) {
     e.preventDefault();
     if (!email) return;
-    setSubscribed(true);
-    setEmail("");
+    setSubmitting(true);
+    setError("");
+    try {
+      await subscribeNewsletter(email);
+      setSubscribed(true);
+      setEmail("");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -79,12 +91,14 @@ export function Blog() {
                 />
                 <button
                   type="submit"
-                  className="shrink-0 rounded-full bg-gold-400 px-6 py-3 text-sm font-medium text-forest-950 transition-colors hover:bg-gold-300"
+                  disabled={submitting}
+                  className="shrink-0 rounded-full bg-gold-400 px-6 py-3 text-sm font-medium text-forest-950 transition-colors hover:bg-gold-300 disabled:opacity-60"
                 >
-                  Subscribe
+                  {submitting ? "..." : "Subscribe"}
                 </button>
               </form>
             )}
+            {error && <p className="mt-4 text-sm text-red-300">{error}</p>}
           </Reveal>
         </Container>
       </section>

@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { Reveal } from "@/components/ui/Reveal";
 import { PageHero } from "@/components/ui/PageHero";
+import { submitContact } from "@/lib/api";
 
 const contactCards = [
   {
@@ -42,20 +43,29 @@ export function Contact() {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) {
       setError("Please fill in all fields");
       return;
     }
     setError("");
-    setSent(true);
-    setForm(emptyForm);
+    setSubmitting(true);
+    try {
+      await submitContact(form);
+      setSent(true);
+      setForm(emptyForm);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -156,9 +166,10 @@ export function Contact() {
                   {error && <p className="text-sm text-red-600">{error}</p>}
                   <button
                     type="submit"
-                    className="rounded-full bg-forest-900 px-8 py-3 text-sm font-medium text-cream transition-colors hover:bg-forest-800"
+                    disabled={submitting}
+                    className="rounded-full bg-forest-900 px-8 py-3 text-sm font-medium text-cream transition-colors hover:bg-forest-800 disabled:opacity-60"
                   >
-                    Send Message
+                    {submitting ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               )}
