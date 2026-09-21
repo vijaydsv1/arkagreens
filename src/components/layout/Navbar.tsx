@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { Menu, X, Leaf, ShoppingBag } from "lucide-react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { Menu, X, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/context/CartContext";
 import { CartDrawer } from "@/components/cart/CartDrawer";
+import { Logo } from "@/components/brand/Logo";
 
 const links = [
   { href: "/about", label: "About" },
@@ -19,6 +20,13 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const { itemCount } = useCart();
+  const { pathname } = useLocation();
+
+  // Only the home page has a light hero behind the nav -- every other route
+  // opens on the dark PageHero, so the transparent-until-scrolled treatment
+  // would make dark nav text unreadable against it.
+  const isHome = pathname === "/";
+  const solid = scrolled || !isHome;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -31,17 +39,12 @@ export function Navbar() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled ? "bg-cream/85 backdrop-blur-md shadow-[0_1px_0_rgba(14,31,22,0.08)]" : "bg-transparent",
+        solid ? "bg-cream/85 backdrop-blur-md shadow-[0_1px_0_rgba(14,31,22,0.08)]" : "bg-transparent",
       )}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 lg:px-10">
-        <Link to="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-forest-900 text-cream">
-            <Leaf className="h-4 w-4" />
-          </span>
-          <span className="font-display text-lg font-semibold tracking-wide text-forest-950">
-            ARKA GREENS
-          </span>
+        <Link to="/" onClick={() => setOpen(false)}>
+          <Logo tone="dark" />
         </Link>
 
         <nav className="hidden items-center gap-9 lg:flex">

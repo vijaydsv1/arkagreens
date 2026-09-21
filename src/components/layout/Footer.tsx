@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Leaf, Mail, Phone, MapPin, AtSign, Send } from "lucide-react";
+import { Mail, Phone, MapPin, AtSign, Send } from "lucide-react";
+import { Logo } from "@/components/brand/Logo";
 
 const explore = [
   { href: "/about", label: "About Us" },
@@ -21,11 +22,8 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-6 py-16 lg:px-10">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
-            <Link to="/" className="flex items-center gap-2.5">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold-400 text-forest-950">
-                <Leaf className="h-4 w-4" />
-              </span>
-              <span className="font-display text-lg font-semibold tracking-wide">ARKA GREENS</span>
+            <Link to="/">
+              <Logo tone="light" />
             </Link>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-cream/60">
               Nature's nutrient powerhouse. Fresh, organic microgreens and superfoods delivered to

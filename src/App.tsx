@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
+import { SplashScreen } from "@/components/splash/SplashScreen";
 import { CartProvider } from "@/context/CartContext";
 import { Home } from "@/pages/Home";
 import { About } from "@/pages/About";
@@ -14,11 +16,33 @@ import { FAQ } from "@/pages/FAQ";
 import { Contact } from "@/pages/Contact";
 import { Checkout } from "@/pages/Checkout";
 
+const SPLASH_KEY = "arka-splash-seen";
+
+function shouldShowSplash() {
+  try {
+    return !sessionStorage.getItem(SPLASH_KEY);
+  } catch {
+    return true;
+  }
+}
+
 export default function App() {
+  const [showSplash, setShowSplash] = useState(shouldShowSplash);
+
+  function handleSplashDone() {
+    try {
+      sessionStorage.setItem(SPLASH_KEY, "1");
+    } catch {
+      // ignore (private browsing, storage disabled, etc.)
+    }
+    setShowSplash(false);
+  }
+
   return (
     <CartProvider>
       <BrowserRouter>
         <ScrollToTop />
+        {showSplash && <SplashScreen onDone={handleSplashDone} />}
         <div className="flex min-h-screen flex-col bg-cream">
           <Navbar />
           <main className="flex-1">
