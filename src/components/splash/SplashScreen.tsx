@@ -41,6 +41,46 @@ function makeParticles(count: number): Particle[] {
   }));
 }
 
+function LogoReveal() {
+  return (
+    <div className="relative">
+      <motion.div
+        initial={{ clipPath: "inset(0% 100% 0% 0%)", filter: "blur(16px)" }}
+        animate={{ clipPath: "inset(0% 0% 0% 0%)", filter: "blur(0px)" }}
+        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <img
+          src={logoLockupWhite}
+          alt="Arka Greens — Nature's Nutrient Powerhouse"
+          className="h-16 w-auto drop-shadow-[0_4px_24px_rgba(0,0,0,0.4)] md:h-24"
+        />
+      </motion.div>
+
+      {/* light sweep, masked to the logo's own silhouette */}
+      <div
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+        style={{
+          WebkitMaskImage: `url(${logoLockupWhite})`,
+          maskImage: `url(${logoLockupWhite})`,
+          WebkitMaskSize: "contain",
+          maskSize: "contain",
+          WebkitMaskRepeat: "no-repeat",
+          maskRepeat: "no-repeat",
+          WebkitMaskPosition: "center",
+          maskPosition: "center",
+        }}
+      >
+        <motion.div
+          className="absolute inset-y-0 w-1/4 -skew-x-12 bg-gradient-to-r from-transparent via-white to-transparent opacity-95"
+          initial={{ left: "-45%" }}
+          animate={{ left: "125%" }}
+          transition={{ duration: 0.85, delay: 1.15, ease: "easeIn" }}
+        />
+      </div>
+    </div>
+  );
+}
+
 function WordCycle() {
   const [index, setIndex] = useState(-1);
 
@@ -125,22 +165,20 @@ export function SplashScreen({ onDone }: { onDone: () => void }) {
             />
           ))}
 
+          {/* one-time flash as the reveal completes */}
+          <motion.div
+            className="pointer-events-none absolute h-64 w-64 rounded-full bg-cream blur-2xl"
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: [0, 0.5, 0], scale: [0.6, 1.4, 1.8] }}
+            transition={{ duration: 1, delay: 1, ease: "easeOut" }}
+          />
+
           <motion.div
             className="relative flex flex-col items-center px-6 text-center"
             animate={{ scale: [1, 1.02, 1] }}
             transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut", delay: 1.6 }}
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <img
-                src={logoLockupWhite}
-                alt="Arka Greens — Nature's Nutrient Powerhouse"
-                className="h-16 w-auto drop-shadow-[0_4px_20px_rgba(0,0,0,0.35)] md:h-24"
-              />
-            </motion.div>
+            <LogoReveal />
 
             <WordCycle />
           </motion.div>
