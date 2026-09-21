@@ -18,7 +18,13 @@ import { Checkout } from "@/pages/Checkout";
 
 const SPLASH_KEY = "arka-splash-seen";
 
+// TEMP: while the splash is still being reviewed, always show it instead of
+// once per browser session -- flip back to false before this goes live so
+// real visitors aren't forced through a 30s intro on every repeat visit.
+const ALWAYS_SHOW_SPLASH = true;
+
 function shouldShowSplash() {
+  if (ALWAYS_SHOW_SPLASH) return true;
   try {
     return !sessionStorage.getItem(SPLASH_KEY);
   } catch {

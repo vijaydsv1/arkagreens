@@ -26,8 +26,7 @@ export function Footer() {
               <Logo tone="light" />
             </Link>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-cream/60">
-              Nature's nutrient powerhouse. Fresh, organic microgreens and superfoods delivered to
-              your doorstep.
+              Fresh, organic microgreens and superfoods delivered to your doorstep.
             </p>
             <div className="mt-6 flex gap-3">
               <a

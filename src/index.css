@@ -17,6 +17,10 @@
   --color-forest-600: #2f5c3d;
   --color-forest-500: #3f7350;
 
+  /* True brand green — matches the actual Arka Greens logo (lighter/more
+     vibrant than the near-black forest-950/900 used for dark UI surfaces) */
+  --color-brand-green: #1b5e35;
+
   /* Brass / gold — accent */
   --color-gold-300: #e5cd9e;
   --color-gold-400: #d4b483;

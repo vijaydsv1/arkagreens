@@ -44,7 +44,7 @@ export function Navbar() {
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 lg:px-10">
         <Link to="/" onClick={() => setOpen(false)}>
-          <Logo tone="dark" />
+          <Logo tone="dark" size="sm" />
         </Link>
 
         <nav className="hidden items-center gap-9 lg:flex">
