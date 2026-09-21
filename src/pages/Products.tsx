@@ -13,11 +13,11 @@ const tabs = [
   { key: "flowers", label: "Edible Flowers", items: edibleFlowers },
 ] as const;
 
-function formatINR(value: number) {
+export function formatINR(value: number) {
   return `₹${value.toLocaleString("en-IN")}`;
 }
 
-function ProductCard({ item }: { item: ProductItem }) {
+export function ProductCard({ item }: { item: ProductItem }) {
   const { lines, addItem, setQuantity } = useCart();
   const line = lines.find((l) => l.id === item.id);
   const quantity = line?.quantity ?? 0;
