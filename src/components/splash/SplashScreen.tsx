@@ -179,6 +179,21 @@ export function SplashScreen({ onDone }: { onDone: () => void }) {
             animate={{ scale: [1, 1.02, 1] }}
             transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut", delay: 1.6 }}
           >
+            {/* slow rotating aura behind the mark */}
+            <motion.div
+              className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl md:h-96 md:w-96"
+              style={{
+                background:
+                  "conic-gradient(from 0deg, rgba(212,180,131,0.4), rgba(47,92,61,0.25), rgba(212,180,131,0.15), rgba(47,92,61,0.3), rgba(212,180,131,0.4))",
+              }}
+              initial={{ opacity: 0, rotate: 0 }}
+              animate={{ opacity: 1, rotate: 360 }}
+              transition={{
+                opacity: { duration: 1, delay: 0.8 },
+                rotate: { duration: 16, repeat: Infinity, ease: "linear" },
+              }}
+            />
+
             <LogoReveal />
 
             <WordCycle />
