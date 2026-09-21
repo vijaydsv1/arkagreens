@@ -146,60 +146,72 @@ export function Home() {
 
   return (
     <>
-      <section className="relative overflow-hidden pb-24 pt-40 md:pb-32 md:pt-48">
-        <div className="absolute inset-0">
-          <motion.img
-            src={heroMicrogreens}
-            alt=""
-            className="h-full w-full object-cover"
-            animate={{ scale: [1, 1.06, 1] }}
-            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-cream via-cream/92 to-cream/55" />
-          <div className="absolute inset-0 bg-gradient-to-t from-cream via-transparent to-cream/40" />
-        </div>
+      <section className="overflow-hidden pb-20 pt-36 md:pb-28 md:pt-44">
+        <Container>
+          <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
+            <div>
+              <Reveal>
+                <div className="mb-7 inline-flex items-center gap-2 rounded-full bg-forest-900/[0.06] px-4 py-2">
+                  <Sparkles className="h-3.5 w-3.5 text-gold-600" />
+                  <span className="text-xs font-medium tracking-wide text-forest-900">
+                    Nature's Nutrient Powerhouse
+                  </span>
+                </div>
+              </Reveal>
+              <Reveal delay={0.08}>
+                <h1 className="font-display text-5xl font-semibold leading-[1.08] text-forest-950 md:text-6xl">
+                  Fresh Microgreens &amp; Superfoods for Optimal Health
+                </h1>
+              </Reveal>
+              <Reveal delay={0.16}>
+                <p className="mt-7 max-w-xl text-lg leading-relaxed text-ink-500">
+                  Discover the power of nutrient-dense microgreens, sprouts, and edible flowers.
+                  Grown with care, delivered fresh, designed to transform your health.
+                </p>
+              </Reveal>
+              <Reveal delay={0.24}>
+                <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                  <Button href="/products">
+                    Explore Products <ArrowRight className="h-4 w-4" />
+                  </Button>
+                  <Button href="/how-it-works" variant="outline">
+                    Our Growing Process
+                  </Button>
+                </div>
+              </Reveal>
+              <Reveal delay={0.32}>
+                <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+                  {heroStats.map((stat) => (
+                    <div key={stat.label}>
+                      <p className="font-display text-2xl font-semibold text-forest-950 md:text-3xl">
+                        {stat.value}
+                      </p>
+                      <p className="mt-1 text-xs tracking-wide text-ink-500 uppercase">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+            </div>
 
-        <Container className="relative">
-          <div className="max-w-2xl">
-            <Reveal>
-              <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-white/60 px-4 py-2 backdrop-blur-sm">
-                <Sparkles className="h-3.5 w-3.5 text-gold-600" />
-                <span className="text-xs font-medium tracking-wide text-forest-900">
-                  Nature's Nutrient Powerhouse
+            <Reveal delay={0.2} className="relative">
+              <div className="relative overflow-hidden rounded-3xl shadow-soft">
+                <motion.img
+                  src={heroMicrogreens}
+                  alt="Freshly harvested microgreens"
+                  className="h-[24rem] w-full object-cover sm:h-[30rem] lg:h-[34rem]"
+                  animate={{ scale: [1, 1.06, 1] }}
+                  transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-forest-950/35 via-transparent to-transparent" />
+              </div>
+              <div className="absolute -left-4 bottom-6 flex items-center gap-3 rounded-2xl bg-white p-4 shadow-soft sm:-left-8 sm:p-5">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-forest-900/8 text-forest-900">
+                  <BadgeCheck className="h-5 w-5" />
                 </span>
-              </div>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <h1 className="font-display text-5xl font-semibold leading-[1.08] text-forest-950 md:text-6xl">
-                Fresh Microgreens &amp; Superfoods for Optimal Health
-              </h1>
-            </Reveal>
-            <Reveal delay={0.16}>
-              <p className="mt-7 max-w-xl text-lg leading-relaxed text-ink-500">
-                Discover the power of nutrient-dense microgreens, sprouts, and edible flowers.
-                Grown with care, delivered fresh, designed to transform your health.
-              </p>
-            </Reveal>
-            <Reveal delay={0.24}>
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                <Button href="/products">
-                  Explore Products <ArrowRight className="h-4 w-4" />
-                </Button>
-                <Button href="/how-it-works" variant="outline">
-                  Our Growing Process
-                </Button>
-              </div>
-            </Reveal>
-            <Reveal delay={0.32}>
-              <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4">
-                {heroStats.map((stat) => (
-                  <div key={stat.label}>
-                    <p className="font-display text-2xl font-semibold text-forest-950 md:text-3xl">
-                      {stat.value}
-                    </p>
-                    <p className="mt-1 text-xs tracking-wide text-ink-500 uppercase">{stat.label}</p>
-                  </div>
-                ))}
+                <div>
+                  <p className="font-display text-sm font-semibold text-forest-950">100% Organic</p>
+                  <p className="text-xs text-ink-500">Certified &amp; lab-tested</p>
+                </div>
               </div>
             </Reveal>
           </div>
