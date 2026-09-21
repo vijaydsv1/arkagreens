@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logoLockup from "@/assets/logo-lockup.png";
+import logoLockupWhite from "@/assets/logo-lockup-white.png";
 
 const HOLD_MS = 29300;
 const EXIT_DURATION = 0.7;
@@ -134,12 +134,11 @@ export function SplashScreen({ onDone }: { onDone: () => void }) {
               initial={{ opacity: 0, scale: 0.85, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="rounded-2xl bg-cream px-8 py-6 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] md:px-10 md:py-7"
             >
               <img
-                src={logoLockup}
+                src={logoLockupWhite}
                 alt="Arka Greens — Nature's Nutrient Powerhouse"
-                className="h-14 w-auto md:h-20"
+                className="h-16 w-auto drop-shadow-[0_4px_20px_rgba(0,0,0,0.35)] md:h-24"
               />
             </motion.div>
 
