@@ -45,14 +45,15 @@ function LogoReveal() {
   return (
     <div className="relative">
       <motion.div
-        initial={{ clipPath: "inset(0% 100% 0% 0%)", filter: "blur(16px)" }}
-        animate={{ clipPath: "inset(0% 0% 0% 0%)", filter: "blur(0px)" }}
+        initial={{ clipPath: "inset(0% 100% 0% 0%)" }}
+        animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
         transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
       >
         <img
           src={logoLockupWhite}
           alt="Arka Greens — Nature's Nutrient Powerhouse"
-          className="h-16 w-auto drop-shadow-[0_4px_24px_rgba(0,0,0,0.4)] md:h-24"
+          className="h-16 w-auto drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)] md:h-24"
+          style={{ imageRendering: "-webkit-optimize-contrast" }}
         />
       </motion.div>
 
