@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LogoMark } from "@/components/brand/LogoMark";
+import logoLockup from "@/assets/logo-lockup.png";
 
 const HOLD_MS = 29300;
 const EXIT_DURATION = 0.7;
@@ -130,17 +130,17 @@ export function SplashScreen({ onDone }: { onDone: () => void }) {
             animate={{ scale: [1, 1.02, 1] }}
             transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut", delay: 1.6 }}
           >
-            <LogoMark animate className="h-24 w-24 text-cream md:h-32 md:w-32" sparkleColor="#d4b483" />
             <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-6"
+              initial={{ opacity: 0, scale: 0.85, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="rounded-2xl bg-cream px-8 py-6 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] md:px-10 md:py-7"
             >
-              <p className="font-display text-2xl font-semibold tracking-wide text-cream md:text-3xl">
-                Arka Greens
-              </p>
-              <p className="eyebrow mt-3 text-gold-400">Nature&rsquo;s Nutrient Powerhouse</p>
+              <img
+                src={logoLockup}
+                alt="Arka Greens — Nature's Nutrient Powerhouse"
+                className="h-14 w-auto md:h-20"
+              />
             </motion.div>
 
             <WordCycle />
