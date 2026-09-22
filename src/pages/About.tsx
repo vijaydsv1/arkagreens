@@ -1,4 +1,4 @@
-import { Leaf, ShieldCheck, Users, BadgeCheck } from "lucide-react";
+import { Leaf, ShieldCheck, Users, BadgeCheck, Quote } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { Reveal } from "@/components/ui/Reveal";
@@ -63,6 +63,34 @@ export function About() {
                 We envision ARKA GREENS as a trusted partner in health, recognized for our
                 commitment to quality, sustainability, and customer care.
               </p>
+            </Reveal>
+          </div>
+        </Container>
+      </section>
+
+      {/*
+        Founder section — name confirmed (Anusha R.S.), full bio/photo/story
+        still pending from the client. Using a monogram placeholder instead
+        of a fabricated photo, and brand-voice copy instead of invented
+        biographical claims. Swap in the real story once provided.
+      */}
+      <section className="py-24 md:py-32">
+        <Container>
+          <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[0.8fr_1fr]">
+            <Reveal className="mx-auto flex aspect-square w-full max-w-sm items-center justify-center rounded-3xl bg-forest-900/[0.04]">
+              <span className="flex h-32 w-32 items-center justify-center rounded-full bg-forest-900 font-display text-4xl font-semibold text-cream">
+                AR
+              </span>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="eyebrow mb-4">From Our Founder</p>
+              <Quote className="h-8 w-8 text-gold-500/40" />
+              <p className="mt-4 font-display text-2xl font-medium leading-snug text-forest-950 md:text-3xl">
+                &ldquo;Arka Greens started with a simple belief — that everyone deserves access to
+                real, nutrient-dense food. Every tray we grow carries that promise.&rdquo;
+              </p>
+              <p className="mt-6 font-display text-lg font-semibold text-forest-950">Anusha R.S.</p>
+              <p className="text-sm text-ink-500">Founder, Arka Greens</p>
             </Reveal>
           </div>
         </Container>
