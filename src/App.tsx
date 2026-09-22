@@ -15,6 +15,7 @@ import { Blog } from "@/pages/Blog";
 import { FAQ } from "@/pages/FAQ";
 import { Contact } from "@/pages/Contact";
 import { Checkout } from "@/pages/Checkout";
+import { Workshops } from "@/pages/Workshops";
 
 const SPLASH_KEY = "arka-splash-seen";
 
@@ -58,6 +59,7 @@ export default function App() {
               <Route path="/products" element={<Products />} />
               <Route path="/benefits" element={<Benefits />} />
               <Route path="/how-it-works" element={<HowItWorks />} />
+              <Route path="/workshops" element={<Workshops />} />
               <Route path="/testimonials" element={<Testimonials />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/faq" element={<FAQ />} />
